@@ -1,8 +1,11 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 /**
  * Created by JUVA on 19.05.2020.
  */
+@JsonAutoDetect
 public class State {
 
     private int id;
