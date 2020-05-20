@@ -52,21 +52,19 @@ public class ConsoleView {
                 e.printStackTrace();
             }
             LocalDate date = null;
-            if(dateString.matches("[\\d]{2}.[\\d]{2}.[\\d]{4}")) {
+            if(dateString.matches("[\\d]{2}[.][\\d]{2}[.][\\d]{4}")) {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
             }
-            else if(dateString.matches("[\\d]{2}.[\\d]{2}\\,[\\d]{2}")) {
+            else if(dateString.matches("[\\d]{2}[.][\\d]{2}[,][\\d]{2}")) {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd.MM,yy"));
             }
-            else if(dateString.matches("[\\d]{2}.[\\d]{2}.[\\d]{2}")) {
+            else if(dateString.matches("[\\d]{2}[.][\\d]{2}[.][\\d]{2}")) {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd.MM.yy"));
             }
-            else if(dateString.matches("[\\d]{2}/[\\d]{2}/[\\d]{4}")) {
-                System.out.println("4");
+            else if(dateString.matches("[\\d]{2}[/][\\d]{2}[/][\\d]{4}")) {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             }
-            else if(dateString.matches("[\\d]{2}/[\\d]{2}/[\\d]{2}")) {
-                System.out.println("2");
+            else if(dateString.matches("[\\d]{2}[/][\\d]{2}[/][\\d]{2}")) {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yy"));
             }
             else System.out.println("Не верный формат даты");
