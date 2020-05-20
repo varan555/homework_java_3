@@ -3,21 +3,49 @@ package controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.CompanyInfo;
 
-import java.io.StringReader;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Converter {
+    private File file;
+    private ArrayList<CompanyInfo> listOfCompany;
+    private Converter converter;
 
-  //  private List<CompanyInfo> listOfCompany;
+    public Converter() {
+        setFile();
+        convert();
+        listOfCompany = new ArrayList<CompanyInfo>();
+        Collections.addAll(listOfCompany, list);
+    }
 
-    StringReader source = new StringReader(new Reader().getContents());
+    public void setFile() {
+        try {
+            System.out.println("Укажите файл");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            file = new File(reader.readLine());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     ObjectMapper mapper = new ObjectMapper();
 
-    private List<CompanyInfo> listOfCompany = mapper.readValue(source, CompanyInfo.class);
+    private CompanyInfo[] list;
 
+    public ArrayList<CompanyInfo> getListOfCompany() {
+        return listOfCompany;
+    }
 
+    public void convert() {
+        try {
 
-
-
+            list = mapper.readValue(file, CompanyInfo[].class); //addAll(companyInfo.getListOfCompany());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

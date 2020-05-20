@@ -1,6 +1,10 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.time.LocalDate;
 
 /**
  * Created by JUVA on 19.05.2020.
@@ -18,18 +22,6 @@ public class Securities {
     private Currency currency;
 
     public Securities() {
-    }
-
-    public Securities(int id, String code, String name_full, String cfi, String date_to,
-                      String state_reg_date, State state, Currency currency) {
-        this.id = id;
-        this.code = code;
-        this.name_full = name_full;
-        this.cfi = cfi;
-        this.date_to = date_to;
-        this.state_reg_date = state_reg_date;
-        this.state = state;
-        this.currency = currency;
     }
 
     public int getId() {
@@ -64,16 +56,16 @@ public class Securities {
         this.cfi = cfi;
     }
 
-    public String getDate_to() {
-        return date_to;
+    public LocalDate getDate_to() {
+        return LocalDate.parse(date_to);
     }
 
     public void setDate_to(String date_to) {
         this.date_to = date_to;
     }
 
-    public String getState_reg_date() {
-        return state_reg_date;
+    public LocalDate getState_reg_date() {
+        return LocalDate.parse(state_reg_date);
     }
 
     public void setState_reg_date(String state_reg_date) {
@@ -84,6 +76,8 @@ public class Securities {
         return state;
     }
 
+    @JsonSetter("state")
+    @JsonDeserialize(as = State.class)
     public void setState(State state) {
         this.state = state;
     }
@@ -91,8 +85,11 @@ public class Securities {
     public Currency getCurrency() {
         return currency;
     }
-
+    @JsonSetter("currency")
+    @JsonDeserialize(as = Currency.class)
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
+
+
 }

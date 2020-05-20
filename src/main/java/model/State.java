@@ -1,22 +1,19 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * Created by JUVA on 19.05.2020.
  */
 @JsonAutoDetect
+@JsonDeserialize(as = State.class)
 public class State {
 
     private int id;
     private String name;
 
     public State() {
-    }
-
-    public State(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {

@@ -1,13 +1,17 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Created by JUVA on 19.05.2020.
  */
 @JsonAutoDetect
+@JsonDeserialize(as = CompanyInfo.class)
 public class CompanyInfo {
     private  int id;
     private String code;
@@ -24,10 +28,7 @@ public class CompanyInfo {
     private String e_mail;
     private String www;
     private String is_resident;
-    private List securities;
-
-    public CompanyInfo() {
-    }
+    private ArrayList <Securities> securities;
 
     public int getId() {
         return id;
@@ -73,6 +74,8 @@ public class CompanyInfo {
         return company_type;
     }
 
+    @JsonSetter("company_type")
+    @JsonDeserialize(as = CompanyType.class)
     public void setCompany_type(CompanyType company_type) {
         this.company_type = company_type;
     }
@@ -85,18 +88,22 @@ public class CompanyInfo {
         this.ogrn = ogrn;
     }
 
-    public String getEgrul_date() {
-        return egrul_date;
+    public LocalDate getEgrul_date() {
+        return LocalDate.parse(egrul_date);
     }
 
     public void setEgrul_date(String egrul_date) {
         this.egrul_date = egrul_date;
     }
 
+
+   //@JsonDeserialize(as = Country.class)
     public Country getCountry() {
         return country;
     }
 
+    @JsonSetter("country")
+    @JsonDeserialize(as = Country.class)
     public void setCountry(Country country) {
         this.country = country;
     }
@@ -149,11 +156,14 @@ public class CompanyInfo {
         this.is_resident = is_resident;
     }
 
-    public List getSecurities() {
+    //@JsonDeserialize(as = Securities.class)
+    public ArrayList<Securities> getSecurities() {
         return securities;
     }
 
-    public void setSecurities(List securities) {
+    @JsonSetter("securities")
+    @JsonDeserialize(as  = ArrayList.class)
+    public void setSecurities(ArrayList<Securities> securities) {
         this.securities = securities;
     }
 }

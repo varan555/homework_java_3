@@ -10,17 +10,10 @@ public class Currency {
 
     private int id;
     private String code;
-    private String name_sort;
+    private String name_short;
     private String name_full;
 
     public Currency() {
-    }
-
-    public Currency(int id, String code, String name_sort, String name_full) {
-        this.id = id;
-        this.code = code;
-        this.name_sort = name_sort;
-        this.name_full = name_full;
     }
 
     public int getId() {
@@ -39,12 +32,12 @@ public class Currency {
         this.code = code;
     }
 
-    public String getName_sort() {
-        return name_sort;
+    public String getName_short() {
+        return name_short;
     }
 
-    public void setName_sort(String name_sort) {
-        this.name_sort = name_sort;
+    public void setName_short(String name_sort) {
+        this.name_short = name_sort;
     }
 
     public String getName_full() {
