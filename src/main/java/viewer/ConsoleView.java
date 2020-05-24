@@ -29,12 +29,23 @@ public class ConsoleView {
 
     public void overdueSecurities(ArrayList<CompanyInfo> list) {
 
-        for (CompanyInfo ci : list) {
-            ci.getSecurities().stream().filter(y -> y.getState().getName().equals("Аннулирован"))
-                    .forEach(z -> System.out.println("Код:  " + z.getCode() +
-                            "    Дата истечения:  " + z.getDate_to().toString()));
-        }
-        }
+        System.out.println("----------------------------------");
+        System.out.println("Аннулированные бумагы:");
+
+        list.stream().map(CompanyInfo::getSecurities)
+                .flatMap(Collection::stream)
+                .filter(s -> s.getState().getName().equals("Аннулирован"))
+                .forEach(z -> System.out.println("Код:  " + z.getCode() +
+                        "    Дата истечения:  " + z.getDate_to().toString()));
+    }
+
+
+//        for (CompanyInfo ci : list) {
+//            ci.getSecurities().stream().filter(y -> y.getState().getName().equals("Аннулирован"))
+//                    .forEach(z -> System.out.println("Код:  " + z.getCode() +
+//                            "    Дата истечения:  " + z.getDate_to().toString()));
+//        }
+//        }
 //        int summ = 0;
 //        System.out.println("Просроченные бумаги");
 //        for (CompanyInfo ci : list) {
@@ -106,17 +117,24 @@ public class ConsoleView {
               e.printStackTrace();
           }
           final String currencyF = currency;
-           for (CompanyInfo ci : list) {
-               ci.getSecurities().stream().filter(x->x.getCurrency().getCode().equals(currencyF))
-                       .forEach(x->System.out.println("ID:   " + x.getId() + "   Код:     "  +  x.getCode()));
+
+          list.stream()
+                  .map(CompanyInfo::getSecurities)
+                  .flatMap(Collection::stream)
+                  .filter(x -> x.getCurrency().getCode().equals(currencyF))
+                  .forEach(x -> System.out.println("ID:   " + x.getId() + "   Код:     " + x.getCode()));
+      }
+
+//          for (CompanyInfo ci : list) {
+//               ci.getSecurities().stream().filter(x->x.getCurrency().getCode().equals(currencyF))
+//                       .forEach(x->System.out.println("ID:   " + x.getId() + "   Код:     "  +  x.getCode()));
 //               for (Securities sec: ci.getSecurities()) {
 //                   if (sec.getCurrency().getCode().equals(currency)){
 //                       System.out.println("ID:   " + sec.getId() + "   Код:     "  +  sec.getCode());
 //               }
 //              }
           }
-      }
-    }
+
 
 
 
